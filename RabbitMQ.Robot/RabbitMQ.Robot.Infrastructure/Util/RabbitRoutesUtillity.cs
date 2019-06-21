@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebApi.Client.Infrastructure
+namespace RabbitMQ.Robot.Infrastructure
 {
     public class RabbitRoutesUtillity
     {
