@@ -19,24 +19,12 @@ namespace RabbitMQ.Robot.Domain
         [JsonProperty("phoneNumber")]
         public long PhoneNumber { get; set; }
 
-        [JsonProperty("streetAddress")]
-        public string StreetAddress { get; set; }
+        [JsonProperty("password")]
+        public string Password { get; set; }
 
-        [JsonProperty("houseNumber")]
-        public string HouseNumber { get; set; }
-
-        [JsonProperty("neighborhood")]
-        public string Neighborhood { get; set; }
-
-        [JsonProperty("city")]
-        public string City { get; set; }
-
-        [JsonProperty("state")]
-        public string State { get; set; }
-
-        public static BrowserInformation FromJson(string json)
+        public static User FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<BrowserInformation>(json, JsonConverter.Settings);
+            return JsonConvert.DeserializeObject<User>(json, JsonConverter.Settings);
         }
 
         public static string ToJson(User self)
