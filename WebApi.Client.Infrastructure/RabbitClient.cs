@@ -9,7 +9,7 @@ namespace WebApi.Client.Infrastructure
         {
             IModel channel = RabbitMQConnection.GetRabbitMQChannel("localhost", "client_browser_info");
             var body = Encoding.UTF8.GetBytes(message);
-            channel.BasicPublish(exchange: "", routingKey: "browser", basicProperties: null, body: body);
+            channel.BasicPublish(exchange: "", routingKey: "client_browser_info", basicProperties: null, body: body);
         }
     }
 }
