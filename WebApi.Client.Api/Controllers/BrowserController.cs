@@ -17,7 +17,7 @@ namespace WebApi.Client.Api.Controllers
         {
             if(value != null)
             {
-                client.SendMessageToQueue(value.ToString());
+                client.SendMessageToQueue(value.ToString(), RabbitRoutesUtillity.Browser_Route);
                 return CreatedAtAction(nameof(SendJsonOverRabbitQueue), value);
             }
             else
