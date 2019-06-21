@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Client.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Client.Api", "WebApi.Client.Api\WebApi.Client.Api.csproj", "{694189D8-22D2-485B-9A73-E6C737B0BD3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.Robot.Domain", "..\RabbitMQ.Robot\RabbitMQ.Robot.Domain\RabbitMQ.Robot.Domain.csproj", "{FBBEA25F-4278-41B6-B798-3EBE1A963168}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{694189D8-22D2-485B-9A73-E6C737B0BD3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{694189D8-22D2-485B-9A73-E6C737B0BD3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{694189D8-22D2-485B-9A73-E6C737B0BD3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBBEA25F-4278-41B6-B798-3EBE1A963168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBBEA25F-4278-41B6-B798-3EBE1A963168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBBEA25F-4278-41B6-B798-3EBE1A963168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBBEA25F-4278-41B6-B798-3EBE1A963168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
