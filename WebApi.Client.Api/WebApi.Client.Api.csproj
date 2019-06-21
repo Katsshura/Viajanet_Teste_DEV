@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WEbApi.Client.Domain\WEbApi.Client.Domain.csproj" />
     <ProjectReference Include="..\WebApi.Client.Infrastructure\WebApi.Client.Infrastructure.csproj" />
   </ItemGroup>
 
