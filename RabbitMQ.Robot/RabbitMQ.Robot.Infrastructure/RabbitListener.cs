@@ -1,6 +1,9 @@
-﻿using RabbitMQ.Client;
+﻿using Couchbase.Core;
+using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Robot.Domain;
+using RabbitMQ.Robot.Infrastructure.Connections;
 using RabbitMQ.Robot.Infrastructure.DataContent;
 using System;
 using System.Text;
@@ -10,10 +13,12 @@ namespace RabbitMQ.Robot.Infrastructure
     public class RabbitListener
     {
         private readonly SqlServerData db;
+        private readonly IBucket _bucket = CouchbaseConnector.GetBucketInstance();
 
         public RabbitListener(SqlServerData db)
         {
             this.db = db;
+            db.Database.Migrate();
         }
 
         #region Receiver
@@ -55,38 +60,132 @@ namespace RabbitMQ.Robot.Infrastructure
             string message = DecodeEventArgBody(eventArgs.Body);
             BrowserInformation browserObj = BrowserInformation.FromJson(message);
 
+            string key = GenerateRandomGuidString();
+
+            AddObjectIntoSqlDatabase(browserObj);
+
+            //Add BrowserInformation into Couchbase bucket
+            _bucket.Upsert(key, new {
+                Ip = browserObj.Ip,
+                PageName = browserObj.PageName,
+                BrowserName = browserObj.BrowserName,
+                Type = browserObj.GetType().Name
+            });
         }
 
         private void OnReceivedMessagePurchase(object consumer, BasicDeliverEventArgs eventArgs)
         {
             string message = DecodeEventArgBody(eventArgs.Body);
             Purchase purchaseObj = Purchase.FromJson(message);
+
+            AddObjectIntoSqlDatabase(purchaseObj);
+
+            string key = GenerateRandomGuidString();
+
+            //Add Purchase into Couchbase bucket
+            _bucket.Upsert(key, new {
+                ProductId = purchaseObj.ProductId,
+                UserId = purchaseObj.UserId,
+                Type = purchaseObj.GetType().Name
+            });
         }
 
         private void OnReceivedMessageUser(object consumer, BasicDeliverEventArgs eventArgs)
         {
             string message = DecodeEventArgBody(eventArgs.Body);
             User userObj = User.FromJson(message);
+
+            if (!userObj.Id.HasValue) { userObj.Id = Guid.NewGuid(); }
+
+            AddObjectIntoSqlDatabase(userObj);
+
+            //Add User into Couchbase bucket
+            _bucket.Upsert(userObj.Id.ToString(), new {
+                Name = userObj.Name,
+                LastName = userObj.LastName,
+                Email = userObj.Email,
+                Pass = userObj.Password,
+                PhoneNumber = userObj.PhoneNumber,
+                Type = userObj.GetType().Name
+            });
         }
 
         #endregion
 
-        private string DecodeEventArgBody(byte[] body)
-        {
-            return Encoding.UTF8.GetString(body);
-        }
+        private string DecodeEventArgBody(byte[] body) => Encoding.UTF8.GetString(body);
 
-        private void AddObjectIntoDatabase(object obj)
+        private string GenerateRandomGuidString() => Guid.NewGuid().ToString();
+
+        private void AddObjectIntoSqlDatabase(object obj)
         {
             try
             {
-                db.Add(obj);
+                object a = db.Add(obj);
                 db.SaveChanges();
+                Console.WriteLine("Added to SQL Server");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+
+        //WARNING: Only use this method for development purposes
+        //To use this method, call it on RabbitListener Constructor
+        //If your database is already populated this can create duplicated
+        //files on Couchbase!
+        private void PopulateDatabasesWithInitialProducts()
+        {
+
+            Product one = new Product();
+            Product two = new Product();
+            Product three = new Product();
+            Product four = new Product();
+
+            one.Id = Guid.NewGuid(); one.Title = "Product 1";
+            one.Desc = "Product 1 description"; one.Price = 8.99m;
+            db.Add(one);
+            _bucket.Upsert(one.Id.ToString(), new {
+                Title = one.Title,
+                Desc = one.Desc,
+                Price = one.Price,
+                Type = one.GetType().Name
+            });
+
+            two.Id = Guid.NewGuid(); two.Title = "Product 2";
+            two.Desc = "Product 2 description"; two.Price = 1.99m;
+            db.Add(two);
+            _bucket.Upsert(two.Id.ToString(), new
+            {
+                Title = two.Title,
+                Desc = two.Desc,
+                Price = two.Price,
+                Type = two.GetType().Name
+            });
+
+            three.Id = Guid.NewGuid(); three.Title = "Product 3";
+            three.Desc = "Product 3 description"; three.Price = 20.99m;
+            db.Add(three);
+            _bucket.Upsert(three.Id.ToString(), new
+            {
+                Title = three.Title,
+                Desc = three.Desc,
+                Price = three.Price,
+                Type = three.GetType().Name
+            });
+
+            four.Id = Guid.NewGuid(); four.Title = "Product 4";
+            four.Desc = "Product 4 description"; four.Price = 4.00m;
+            db.Add(four);
+            _bucket.Upsert(four.Id.ToString(), new
+            {
+                Title = four.Title,
+                Desc = four.Desc,
+                Price = four.Price,
+                Type = four.GetType().Name
+            });
+
+            Console.WriteLine("Products were populated into databases");
         }
     }
 }

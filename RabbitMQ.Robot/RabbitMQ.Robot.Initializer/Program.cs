@@ -1,5 +1,5 @@
-﻿using RabbitMQ.Robot.Domain;
-using RabbitMQ.Robot.Infrastructure;
+﻿using RabbitMQ.Robot.Infrastructure;
+using RabbitMQ.Robot.Infrastructure.Connections;
 using RabbitMQ.Robot.Initializer.DataContexts;
 using System;
 
@@ -12,6 +12,7 @@ namespace RabbitMQ.Robot.Initializer
             Console.WriteLine("Initializing Robot...");
 
             SqlServerDataContext dataContext = new SqlServerDataContext();
+            CouchbaseConnector.OpenCouchbaseConnection();
 
             RabbitListener listener = new RabbitListener(dataContext);
 
