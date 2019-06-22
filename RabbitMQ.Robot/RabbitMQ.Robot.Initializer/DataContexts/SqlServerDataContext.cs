@@ -15,9 +15,6 @@ namespace RabbitMQ.Robot.Initializer.DataContexts
                 .ToTable("BrowserInformation")
                 .HasKey(key => new { key.PageName, key.Ip });
 
-            modelBuilder.Entity<Category>()
-                .ToTable("Category");
-
             modelBuilder.Entity<Product>()
                 .ToTable("Product");
 

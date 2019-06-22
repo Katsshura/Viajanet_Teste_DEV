@@ -32,64 +32,39 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                     b.ToTable("BrowserInformation");
                 });
 
-            modelBuilder.Entity("RabbitMQ.Robot.Domain.Category", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
             modelBuilder.Entity("RabbitMQ.Robot.Domain.Product", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CategoryId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Desc");
 
-                    b.Property<long>("Price");
+                    b.Property<decimal>("Price");
 
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
                 });
 
             modelBuilder.Entity("RabbitMQ.Robot.Domain.Purchase", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<Guid>("UserId");
 
-                    b.Property<int>("ProductId");
-
-                    b.Property<long?>("ProductId1");
-
-                    b.Property<long?>("UserId1");
+                    b.Property<Guid>("ProductId");
 
                     b.HasKey("UserId", "ProductId");
 
-                    b.HasIndex("ProductId1");
-
-                    b.HasIndex("UserId1");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Purhcase");
                 });
 
             modelBuilder.Entity("RabbitMQ.Robot.Domain.User", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email");
 
@@ -106,23 +81,17 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("RabbitMQ.Robot.Domain.Product", b =>
-                {
-                    b.HasOne("RabbitMQ.Robot.Domain.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("RabbitMQ.Robot.Domain.Purchase", b =>
                 {
                     b.HasOne("RabbitMQ.Robot.Domain.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId1");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("RabbitMQ.Robot.Domain.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
