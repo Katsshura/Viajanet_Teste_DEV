@@ -13,9 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.Robot.Domain", "..
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ - Robot", "RabbitMQ - Robot", "{36B8AD74-B3DF-439A-8BA4-AA6B61A6C924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.Robot.Infrastructure", "..\RabbitMQ.Robot\RabbitMQ.Robot.Infrastructure\RabbitMQ.Robot.Infrastructure.csproj", "{BAF2A06D-5F5E-40EA-83ED-C8749F39BBE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.Robot.Infrastructure", "..\RabbitMQ.Robot\RabbitMQ.Robot.Infrastructure\RabbitMQ.Robot.Infrastructure.csproj", "{BAF2A06D-5F5E-40EA-83ED-C8749F39BBE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.Robot.Initializer", "..\RabbitMQ.Robot\RabbitMQ.Robot.Initializer\RabbitMQ.Robot.Initializer.csproj", "{D02AC66C-E0DD-4FCA-A08A-0F6F02039EB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.Robot.Initializer", "..\RabbitMQ.Robot\RabbitMQ.Robot.Initializer\RabbitMQ.Robot.Initializer.csproj", "{D02AC66C-E0DD-4FCA-A08A-0F6F02039EB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi- CouchbaseReader", "WebApi- CouchbaseReader", "{C2955D8D-4D08-4353-8DA8-B3F6A3FD8DC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.CouchbaseReader.Infrastructure", "..\WebApi.CouchbaseReader\WebApi.CouchbaseReader.Infrastructure\WebApi.CouchbaseReader.Infrastructure.csproj", "{EEC50781-6498-4FB8-95BB-825300B08DEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.CouchbaseReader.Api", "..\WebApi.CouchbaseReader\WebApi.CouchbaseReader.Api\WebApi.CouchbaseReader.Api.csproj", "{6EFB2242-1A21-4BBB-992C-9CCC30331708}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,14 @@ Global
 		{D02AC66C-E0DD-4FCA-A08A-0F6F02039EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D02AC66C-E0DD-4FCA-A08A-0F6F02039EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D02AC66C-E0DD-4FCA-A08A-0F6F02039EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC50781-6498-4FB8-95BB-825300B08DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC50781-6498-4FB8-95BB-825300B08DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC50781-6498-4FB8-95BB-825300B08DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC50781-6498-4FB8-95BB-825300B08DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EFB2242-1A21-4BBB-992C-9CCC30331708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EFB2242-1A21-4BBB-992C-9CCC30331708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EFB2242-1A21-4BBB-992C-9CCC30331708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EFB2242-1A21-4BBB-992C-9CCC30331708}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +67,8 @@ Global
 		{FBBEA25F-4278-41B6-B798-3EBE1A963168} = {36B8AD74-B3DF-439A-8BA4-AA6B61A6C924}
 		{BAF2A06D-5F5E-40EA-83ED-C8749F39BBE8} = {36B8AD74-B3DF-439A-8BA4-AA6B61A6C924}
 		{D02AC66C-E0DD-4FCA-A08A-0F6F02039EB2} = {36B8AD74-B3DF-439A-8BA4-AA6B61A6C924}
+		{EEC50781-6498-4FB8-95BB-825300B08DEF} = {C2955D8D-4D08-4353-8DA8-B3F6A3FD8DC1}
+		{6EFB2242-1A21-4BBB-992C-9CCC30331708} = {C2955D8D-4D08-4353-8DA8-B3F6A3FD8DC1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF5D7859-9C17-45A8-9B96-860D336A59B5}
