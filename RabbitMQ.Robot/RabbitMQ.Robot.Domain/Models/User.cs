@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace RabbitMQ.Robot.Domain
 {
     public class User
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public Guid? Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

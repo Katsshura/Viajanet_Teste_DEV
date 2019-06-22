@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace RabbitMQ.Robot.Domain
 {
     public class Product
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }
@@ -14,12 +15,7 @@ namespace RabbitMQ.Robot.Domain
         public string Desc { get; set; }
 
         [JsonProperty("price")]
-        public long Price { get; set; }
-
-        [JsonProperty("categoryId")]
-        public long CategoryId { get; set; }
-
-        public virtual Category Category { get; set; }
+        public decimal Price { get; set; }
 
         public static Product FromJson(string json)
         {
