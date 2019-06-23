@@ -1,4 +1,4 @@
-<form [formGroup]="formModel" autocomplete="off">
+<form [formGroup]="formModel" autocomplete="off" (submit)="onSubmit(formModel)">
 
   <div class="form-group required">
     <label>Name</label>
@@ -27,6 +27,15 @@
     <label class="text-danger" *ngIf="formModel.get('email').touched && formModel.get('email').errors?.email">Invalid
       Email!</label>
     <label class="text-danger" *ngIf="formModel.get('email').touched && formModel.get('email').errors?.required">This
+      field is
+      Mandatory!</label>
+    <label class="text-danger" *ngIf="formModel.get('email').touched && formModel.get('email').errors?.emailAlreadyExists">This
+      email already exists!!</label>
+  </div>
+  <div class="form-group required">
+    <label>Phone Number</label>
+    <input class="form-control" formControlName="phoneNumber">
+    <label class="text-danger" *ngIf="formModel.get('phoneNumber').touched && formModel.get('phoneNumber').errors?.required">This
       field is
       Mandatory!</label>
   </div>

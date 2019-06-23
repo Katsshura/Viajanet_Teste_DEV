@@ -1,6 +1,6 @@
 <hr>
 <img src="/assets/images/login.png" class="mx-auto d-block" height="120px">
-<form [formGroup]="formModel" class="mb-4" autocomplete="off">
+<form [formGroup]="formModel" class="mb-4" autocomplete="off" (submit)="onSubmit(formModel)">
   <div class="form-group">
     <label>Email</label>
     <input class="form-control" formControlName="email">
