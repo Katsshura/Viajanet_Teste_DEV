@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, NgForm, Form } from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import { SignupService } from 'src/app/services/signup.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {HttpClient} from '@angular/common/http';
 
 export class SignupComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private service: SignupService) { }
 
   formModel = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -21,9 +21,9 @@ export class SignupComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(4)]],
     confirmPass: ['', Validators.required],
 
-  },{validator: [this.comparePasswords, this.validateEmail]});
+  },{validator: this.validateIfPasswordsMatch});
 
-  comparePasswords(fb: FormGroup){
+  validateIfPasswordsMatch(fb: FormGroup){
     let confirmPasswordController = fb.get('confirmPass');
     if(confirmPasswordController.errors === null || 'passwordMismatch' in confirmPasswordController.errors){
       if(fb.get('password').value != confirmPasswordController.value){
@@ -34,39 +34,12 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  validateEmail(fb: FormGroup){
-    let emailController = fb.get('email');
-    if(emailController.errors === null || 'emailAlreadyExists' in emailController.errors){
-      if(emailController.value === "emerson@emerson.com"){
-        emailController.setErrors({emailAlreadyExists: true});
-      }else{
-        emailController.setErrors(null);
-      }
-    }
-  }
-
   ngOnInit() {
     
   }
 
   async onSubmit(fb: NgForm){
-    console.log(fb.value);
-    this.getEmailFromServer(fb.value['email']);
-  }
-
-  async getEmailFromServer(email: string){
-    if(email === null){return;}
-    this.http.get('http://localhost:60620/api/v1/User/getemail', {
-      params: {
-        email: email
-      },
-      observe: 'response'
-    })
-    .toPromise()
-    .then(response => {
-      console.log(response.body);
-    })
-    .catch(console.log);
+    this.service.onSignUp(fb);
   }
   
 }

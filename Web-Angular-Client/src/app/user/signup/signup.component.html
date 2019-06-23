@@ -29,12 +29,10 @@
     <label class="text-danger" *ngIf="formModel.get('email').touched && formModel.get('email').errors?.required">This
       field is
       Mandatory!</label>
-    <label class="text-danger" *ngIf="formModel.get('email').touched && formModel.get('email').errors?.emailAlreadyExists">This
-      email already exists!!</label>
   </div>
   <div class="form-group required">
     <label>Phone Number</label>
-    <input class="form-control" formControlName="phoneNumber">
+    <input type="number" class="form-control" formControlName="phoneNumber">
     <label class="text-danger" *ngIf="formModel.get('phoneNumber').touched && formModel.get('phoneNumber').errors?.required">This
       field is
       Mandatory!</label>
