@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ParticlePropertiesService } from '../util/particle-properties.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
+  myParams: object = {};
+  tit: string;
 
-  constructor() { }
+
+  constructor(private params: ParticlePropertiesService) { }
 
   ngOnInit() {
+    this.myParams = this.params.myParams;
+    this.tit = "hello";
   }
-
 }
