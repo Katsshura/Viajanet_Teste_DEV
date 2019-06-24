@@ -35,11 +35,11 @@ namespace RabbitMQ.Robot.Infrastructure
             {
                 consumer.Received += OnReceivedMessageBrowser;
             }
-            else if(route == RabbitRoutesUtillity.Purchase_Route)
+            else if (route == RabbitRoutesUtillity.Purchase_Route)
             {
                 consumer.Received += OnReceivedMessagePurchase;
             }
-            else if(route == RabbitRoutesUtillity.User_Route)
+            else if (route == RabbitRoutesUtillity.User_Route)
             {
                 consumer.Received += OnReceivedMessageUser;
             }
@@ -62,14 +62,24 @@ namespace RabbitMQ.Robot.Infrastructure
 
             string key = GenerateRandomGuidString();
 
-            AddObjectIntoSqlDatabase(browserObj);
-
-            //Add BrowserInformation into Couchbase bucket
-            _bucket.Upsert(key, new {
-                Ip = browserObj.Ip,
-                PageName = browserObj.PageName,
-                BrowserName = browserObj.BrowserName,
-                Type = browserObj.GetType().Name
+            db.BrowserInformations.ContainsAsync(browserObj).ContinueWith((result) =>
+            {
+                if (!result.Result)
+                {
+                    AddObjectIntoSqlDatabase(browserObj);
+                    //Add BrowserInformation into Couchbase bucket
+                    _bucket.Upsert(key, new
+                    {
+                        Ip = browserObj.Ip,
+                        PageName = browserObj.PageName,
+                        BrowserName = browserObj.BrowserName,
+                        Type = browserObj.GetType().Name
+                    });
+                }
+                else
+                {
+                    Console.WriteLine("Already exists in database");
+                }
             });
         }
 
@@ -77,13 +87,13 @@ namespace RabbitMQ.Robot.Infrastructure
         {
             string message = DecodeEventArgBody(eventArgs.Body);
             Purchase purchaseObj = Purchase.FromJson(message);
+            string key = GenerateRandomGuidString();
 
             AddObjectIntoSqlDatabase(purchaseObj);
 
-            string key = GenerateRandomGuidString();
-
             //Add Purchase into Couchbase bucket
-            _bucket.Upsert(key, new {
+            _bucket.Upsert(key, new
+            {
                 ProductId = purchaseObj.ProductId,
                 UserId = purchaseObj.UserId,
                 Type = purchaseObj.GetType().Name
@@ -100,7 +110,8 @@ namespace RabbitMQ.Robot.Infrastructure
             AddObjectIntoSqlDatabase(userObj);
 
             //Add User into Couchbase bucket
-            _bucket.Upsert(userObj.Id.ToString(), new {
+            _bucket.Upsert(userObj.Id.ToString(), new
+            {
                 Name = userObj.Name,
                 LastName = userObj.LastName,
                 Email = userObj.Email,
@@ -142,18 +153,19 @@ namespace RabbitMQ.Robot.Infrastructure
             Product three = new Product();
             Product four = new Product();
 
-            one.Id = Guid.NewGuid(); one.Title = "Product 1";
-            one.Desc = "Product 1 description"; one.Price = 8.99m;
+            one.Id = Guid.NewGuid(); one.Title = "Basic Package";
+            one.Desc = "Product 1 description"; one.Price = 10.99m;
             db.Add(one);
-            _bucket.Upsert(one.Id.ToString(), new {
+            _bucket.Upsert(one.Id.ToString(), new
+            {
                 Title = one.Title,
                 Desc = one.Desc,
                 Price = one.Price,
                 Type = one.GetType().Name
             });
 
-            two.Id = Guid.NewGuid(); two.Title = "Product 2";
-            two.Desc = "Product 2 description"; two.Price = 1.99m;
+            two.Id = Guid.NewGuid(); two.Title = "Deluxe Package";
+            two.Desc = "Product 2 description"; two.Price = 15.99m;
             db.Add(two);
             _bucket.Upsert(two.Id.ToString(), new
             {
@@ -163,7 +175,7 @@ namespace RabbitMQ.Robot.Infrastructure
                 Type = two.GetType().Name
             });
 
-            three.Id = Guid.NewGuid(); three.Title = "Product 3";
+            three.Id = Guid.NewGuid(); three.Title = "Premium Package";
             three.Desc = "Product 3 description"; three.Price = 20.99m;
             db.Add(three);
             _bucket.Upsert(three.Id.ToString(), new
@@ -172,17 +184,6 @@ namespace RabbitMQ.Robot.Infrastructure
                 Desc = three.Desc,
                 Price = three.Price,
                 Type = three.GetType().Name
-            });
-
-            four.Id = Guid.NewGuid(); four.Title = "Product 4";
-            four.Desc = "Product 4 description"; four.Price = 4.00m;
-            db.Add(four);
-            _bucket.Upsert(four.Id.ToString(), new
-            {
-                Title = four.Title,
-                Desc = four.Desc,
-                Price = four.Price,
-                Type = four.GetType().Name
             });
 
             Console.WriteLine("Products were populated into databases");

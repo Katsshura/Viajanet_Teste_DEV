@@ -1,0 +1,70 @@
+<form [formGroup]="formModel" autocomplete="off" (submit)="onSubmit(formModel)">
+
+  <div class="form-group required">
+    <label>Name</label>
+    <input class="form-control" formControlName="name">
+    <label class="text-danger" *ngIf="formModel.get('name').touched && formModel.get('name').errors?.required">This
+      field is
+      Mandatory!</label>
+    <label class="text-danger"
+      *ngIf="formModel.get('name').touched && formModel.get('name').errors?.minlength">Name must have more than 2 letters</label>
+  </div>
+
+  <div class="form-group required">
+    <label>Last Name</label>
+    <input class="form-control required" formControlName="lastName">
+    <label class="text-danger"
+      *ngIf="formModel.get('lastName').touched && formModel.get('lastName').errors?.required">This
+      field is
+      Mandatory!</label>
+      <label class="text-danger"
+      *ngIf="formModel.get('lastName').touched && formModel.get('lastName').errors?.minlength">Last Name must have more than 2 letters</label>
+  </div>
+
+  <div class="form-group required">
+    <label>Email</label>
+    <input class="form-control" formControlName="email">
+    <label class="text-danger" *ngIf="formModel.get('email').touched && formModel.get('email').errors?.email">Invalid
+      Email!</label>
+    <label class="text-danger" *ngIf="formModel.get('email').touched && formModel.get('email').errors?.required">This
+      field is
+      Mandatory!</label>
+  </div>
+  <div class="form-group required">
+    <label>Phone Number</label>
+    <input type="number" class="form-control" formControlName="phoneNumber">
+    <label class="text-danger" *ngIf="formModel.get('phoneNumber').touched && formModel.get('phoneNumber').errors?.required">This
+      field is
+      Mandatory!</label>
+  </div>
+
+  <div class="form-group required">
+    <label>Password</label>
+    <input type="password" class="form-control" formControlName="password">
+    <label class="text-danger"
+      *ngIf="formModel.get('password').touched && formModel.get('password').errors?.required">This
+      field is
+      Mandatory!</label>
+    <label class="text-danger"
+      *ngIf="formModel.get('password').touched && formModel.get('password').errors?.minlength">Minimun
+      4 chars!</label>
+  </div>
+
+  <div class="form-group required">
+    <label>Confirm</label>
+    <input type="password" class="form-control" formControlName="confirmPass">
+    <label class="text-danger"
+      *ngIf="formModel.get('confirmPass').touched && formModel.get('confirmPass').errors?.required">This
+      field is
+      Mandatory!</label>
+    <label class="text-danger"
+      *ngIf="formModel.get('confirmPass').touched && formModel.get('confirmPass').errors?.passwordMismatch">
+      Passwords must be the same!</label>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-8 offset-md-2">
+      <button type="submit" class="btn btn-lg btn-block" [disabled]="!formModel.valid">Sign Up</button>
+    </div>
+  </div>
+</form>

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using WebApi.Client.Infrastructure;
+
 
 namespace WebApi.Client.Api.Controllers
 {
@@ -11,12 +14,18 @@ namespace WebApi.Client.Api.Controllers
         RabbitClient client = new RabbitClient();
 
         [HttpPost]
-        public ActionResult<string> SendJsonOverRabbitQueue([FromBody] JObject value)
+        public async Task<ActionResult<string>> SendJsonOverRabbitQueueAsync()
         {
+            string value;
+            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                value = await reader.ReadToEndAsync();
+            }
+
             if (value != null)
             {
                 client.SendMessageToQueue(value.ToString(), RabbitRoutesUtillity.User_Route);
-                return CreatedAtAction(nameof(SendJsonOverRabbitQueue), value);
+                return CreatedAtAction(nameof(SendJsonOverRabbitQueueAsync), value);
             }
             else
             {

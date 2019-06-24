@@ -50,13 +50,18 @@ namespace RabbitMQ.Robot.Initializer.Migrations
 
             modelBuilder.Entity("RabbitMQ.Robot.Domain.Purchase", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("ProductId");
 
-                    b.HasKey("UserId", "ProductId");
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Purhcase");
                 });

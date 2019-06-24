@@ -1,0 +1,58 @@
+.particle-background {
+    background-color: black;
+    height: 100vh;
+    width: 100%;
+}
+
+.form {
+    position: absolute;
+    align-content: center;
+    color: black;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerDiv{
+    margin: 0 auto;
+}
+
+.card-wrapper{
+    height: 20%;
+    width: 20%;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+h1 {
+    text-align: center;
+    width: 100%;
+    color: #111;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+img{
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 0.8em;
+    margin-bottom: 0.25em;
+    color: #222;
+    font-weight: lighter;
+}

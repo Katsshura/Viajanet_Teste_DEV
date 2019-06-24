@@ -54,12 +54,13 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                 name: "Purhcase",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Purhcase", x => new { x.UserId, x.ProductId });
+                    table.PrimaryKey("PK_Purhcase", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Purhcase_Product_ProductId",
                         column: x => x.ProductId,
@@ -78,6 +79,11 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                 name: "IX_Purhcase_ProductId",
                 table: "Purhcase",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purhcase_UserId",
+                table: "Purhcase",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -23,7 +23,11 @@ namespace RabbitMQ.Robot.Initializer.DataContexts
 
             modelBuilder.Entity<Purchase>()
                 .ToTable("Purhcase")
-                .HasKey(key => new { key.UserId, key.ProductId});
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Purchase>()
+                .HasKey(key => new { key.Id});
         }
     }
 }

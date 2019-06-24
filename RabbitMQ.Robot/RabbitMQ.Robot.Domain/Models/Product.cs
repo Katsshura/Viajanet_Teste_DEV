@@ -31,5 +31,22 @@ namespace RabbitMQ.Robot.Domain
         {
             return Title;
         }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as Product;
+            
+            if(item == null)
+            {
+                return false;
+            }
+
+            return this.Id.Equals(item.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
     }
 }

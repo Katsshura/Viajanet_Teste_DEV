@@ -1,0 +1,30 @@
+<router-outlet></router-outlet>
+<div class="particle-background">
+  <particles [params]="myParams"></particles>
+  <div class="form">
+    <div class="wrapper">
+      <div class="container-wrapper">
+        <div>
+          <label class="label-title ">Payment confirmation</label>
+          <br>
+          <label class="label-subtitle ">Verify if all information are correct before clicking to confirm!</label>
+          <br>
+          <hr>
+          <div class="row info-div">
+            <label class="label-info">Country: {{paymentInformation.country}}</label>
+            <label class="label-info">State: {{paymentInformation.state}}</label>
+          </div>
+          <div class="row info-div">
+            <label class="label-info">Address: {{paymentInformation.address}}</label>
+          </div>
+          <hr>
+          <div class="row info-div">
+            <label class="label-info">Selected Package: {{productInformation.title}}</label>
+          </div>
+          <hr>
+          <button class="btn btn-primary btn-block" type="submit" (click)="onClick()">Confirm payment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
