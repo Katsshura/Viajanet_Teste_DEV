@@ -20,7 +20,7 @@ namespace WebApi.CouchbaseReader.Api.Controllers
         [HttpGet]
         public ActionResult GetAllProducts()
         {
-            var statement = @"Select d.*, Meta(d).id from ViajanetDB d where d.type = 'Product';";
+            var statement = @"Select d.*, Meta(d).id from ViajanetDB d where d.type = 'Product' ORDER BY d.price;";
             var query = new QueryRequest(statement).ScanConsistency(ScanConsistency.RequestPlus);
             return GetDataFromCouchbase(query);
         }
