@@ -4,6 +4,8 @@ import { UserComponent } from './user/user.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { SigninComponent } from './user/signin/signin.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
+import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
 
 const routes: Routes = [
   {path:'home', redirectTo:'/home/signin', pathMatch: 'full'},
@@ -12,7 +14,9 @@ const routes: Routes = [
       {path: 'signup', component: SignupComponent},
       {path: 'signin', component: SigninComponent},
     ]},
-    {path:'landing', component: LandingPageComponent}
+  {path:'landing', component: LandingPageComponent},
+  {path:'checkout', component: CheckoutPageComponent},
+  {path:'finish', component: ConfirmPaymentComponent}
 ];
 
 @NgModule({

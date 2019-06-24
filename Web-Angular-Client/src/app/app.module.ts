@@ -15,6 +15,8 @@ import { SigninComponent } from './user/signin/signin.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import {ParticlePropertiesService} from './util/particle-properties.service';
 import { CardFormComponent } from './components/card-form/card-form.component';
+import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
+import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { CardFormComponent } from './components/card-form/card-form.component';
     SignupComponent,
     SigninComponent,
     LandingPageComponent,
-    CardFormComponent
+    CardFormComponent,
+    CheckoutPageComponent,
+    ConfirmPaymentComponent
   ],
   imports: [
     BrowserModule,
