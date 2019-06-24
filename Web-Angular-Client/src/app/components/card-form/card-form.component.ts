@@ -1,9 +1,8 @@
 import { Component, OnInit, Input} from '@angular/core';
+import { Router } from '@angular/router';
 
-//api_services.js functions! can be located at: src\assets\js\api_services.js
+//api_services.js function can be located at: src\assets\js\api_services.js
 declare const getResponse: any;
-declare const postResponse: any;
-declare const getBrowserInformation: any;
 
 @Component({
   selector: 'app-card-form',
@@ -18,15 +17,31 @@ export class CardFormComponent implements OnInit {
   @Input() alt: string;
   @Input() desc: string;
   @Input() productId:string;
-
-  constructor() {}
+  @Input() productPrice:number;
+  
+  products:any;
+  
+  constructor(private router: Router) {
+    getResponse("product", (res) => this.handleResponseFromServer(res));
+  }
 
   ngOnInit() {
+    console.log(this.productId, this.products);
   }
 
   async onClick(id:string){
-    console.log(id);
-    console.log(await getBrowserInformation());
+    this.saveDataOnLocalStorage();
+    this.router.navigateByUrl('/checkout');
+  }
+
+  private saveDataOnLocalStorage() {
+    localStorage.setItem("product_title", this.title);
+    localStorage.setItem("product_id", this.productId);
+    localStorage.setItem("product_price", this.productPrice.toString());
+  }
+
+  private handleResponseFromServer(res){
+    this.products = res;
   }
 
 }
