@@ -17,6 +17,10 @@ namespace WebApi.Client.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> SendJsonOverRabbitQueueAsync()
         {
+            ///<summary> Using StreamReader to get body from request
+            ///<para>this fix the problem when request come in xml format and [FromBody] cant resolve it</para>
+            ///</summary>
+
             string value;
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             {

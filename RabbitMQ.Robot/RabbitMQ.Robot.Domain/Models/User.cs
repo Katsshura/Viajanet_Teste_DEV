@@ -25,12 +25,12 @@ namespace RabbitMQ.Robot.Domain
 
         public static User FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<User>(json, JsonConverter.Settings);
+            return JsonConvert.DeserializeObject<User>(json, JsonSettings.Settings);
         }
 
         public static string ToJson(User self)
         {
-            return JsonConvert.SerializeObject(self, JsonConverter.Settings);
+            return JsonConvert.SerializeObject(self, JsonSettings.Settings);
         }
 
         public override string ToString()

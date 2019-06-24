@@ -19,12 +19,12 @@ namespace RabbitMQ.Robot.Domain
 
         public static Product FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Product>(json, JsonConverter.Settings);
+            return JsonConvert.DeserializeObject<Product>(json, JsonSettings.Settings);
         }
 
         public static string ToJson(Product self)
         {
-            return JsonConvert.SerializeObject(self, JsonConverter.Settings);
+            return JsonConvert.SerializeObject(self, JsonSettings.Settings);
         }
 
         public override string ToString()

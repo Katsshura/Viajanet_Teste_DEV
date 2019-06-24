@@ -33,7 +33,7 @@ namespace WebApi.CouchbaseReader.Api.Controllers
             {
                 var statement = @"Select d.*, Meta(d).id from ViajanetDB d where d.type = 'Product' and Meta(d).id = $id;";
                 var query = new QueryRequest(statement)
-                    .AddNamedParameter("id",id)
+                    .AddNamedParameter("id", id)
                     .ScanConsistency(ScanConsistency.RequestPlus);
                 return GetDataFromCouchbase(query);
             }
@@ -46,7 +46,7 @@ namespace WebApi.CouchbaseReader.Api.Controllers
         [HttpGet("get")]
         public ActionResult GetProductByTitle([FromQuery] string title)
         {
-            if(title == null)
+            if (title == null)
             {
                 return BadRequest();
             }
@@ -66,6 +66,7 @@ namespace WebApi.CouchbaseReader.Api.Controllers
             var result = _bucket.Query<dynamic>(qr);
 
             if (result != null)
+            {
                 if (result.Rows.Count > 0)
                 {
                     return Ok(result.Rows);
@@ -74,7 +75,9 @@ namespace WebApi.CouchbaseReader.Api.Controllers
                 {
                     return NoContent();
                 }
+            }
             return NoContent();
         }
     }
 }
+

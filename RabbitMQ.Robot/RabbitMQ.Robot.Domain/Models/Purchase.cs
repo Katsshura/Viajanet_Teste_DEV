@@ -21,12 +21,12 @@ namespace RabbitMQ.Robot.Domain
 
         public static Purchase FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Purchase>(json, JsonConverter.Settings);
+            return JsonConvert.DeserializeObject<Purchase>(json, JsonSettings.Settings);
         }
 
         public static string ToJson(Purchase self)
         {
-            return JsonConvert.SerializeObject(self, JsonConverter.Settings);
+            return JsonConvert.SerializeObject(self, JsonSettings.Settings);
         }
 
         public override bool Equals(object obj)

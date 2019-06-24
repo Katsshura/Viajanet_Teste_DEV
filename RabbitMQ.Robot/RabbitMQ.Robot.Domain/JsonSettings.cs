@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace RabbitMQ.Robot.Domain
 {
-    internal static class JsonConverter
+    internal static class JsonSettings
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {

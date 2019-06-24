@@ -48,7 +48,7 @@ namespace WebApi.CouchbaseReader.Api.Controllers
                     .ScanConsistency(ScanConsistency.RequestPlus);
                 return GetDataFromCouchbase(query);
             }
-            else if(pageName != null)
+            else if (pageName != null)
             {
                 //Return all content in database bound to pageName
                 var statement = @"Select d.* from ViajanetDB d where d.type = 'BrowserInformation' and d.pageName = $pageName;";
@@ -70,6 +70,7 @@ namespace WebApi.CouchbaseReader.Api.Controllers
             var result = _bucket.Query<dynamic>(qr);
 
             if (result != null)
+            {
                 if (result.Rows.Count > 0)
                 {
                     return Ok(result.Rows);
@@ -78,7 +79,8 @@ namespace WebApi.CouchbaseReader.Api.Controllers
                 {
                     return NoContent();
                 }
+            }
             return NoContent();
-        } 
+        }
     }
 }

@@ -19,6 +19,8 @@ namespace WebApi.CouchbaseReader.Api.Controllers
         [HttpGet("{id}")]
         public ActionResult GetUserProfile(string id)
         {
+            //Get User Profile by ID
+
             if (id != null)
             {
                 var statement = @"Select d.*, Meta(d).id from ViajanetDB d where d.type = 'User' and Meta(d).id = $id;";

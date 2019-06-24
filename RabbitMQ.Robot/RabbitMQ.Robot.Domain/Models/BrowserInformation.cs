@@ -15,12 +15,12 @@ namespace RabbitMQ.Robot.Domain
 
         public static BrowserInformation FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<BrowserInformation>(json, JsonConverter.Settings);
+            return JsonConvert.DeserializeObject<BrowserInformation>(json, JsonSettings.Settings);
         }
 
         public static string ToJson(BrowserInformation self)
         {
-            return JsonConvert.SerializeObject(self, JsonConverter.Settings);
+            return JsonConvert.SerializeObject(self, JsonSettings.Settings);
         }
 
         public override string ToString()
