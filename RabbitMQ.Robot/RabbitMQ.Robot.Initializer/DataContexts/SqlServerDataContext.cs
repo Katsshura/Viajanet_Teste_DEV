@@ -19,10 +19,12 @@ namespace RabbitMQ.Robot.Initializer.DataContexts
                 .ToTable("Product");
 
             modelBuilder.Entity<User>()
-                .ToTable("User");
+                .ToTable("User")
+                .HasIndex(p => p.Email)
+                .IsUnique(true);
 
             modelBuilder.Entity<Purchase>()
-                .ToTable("Purhcase")
+                .ToTable("Purchase")
                 .Property(p => p.Id)
                 .ValueGeneratedOnAdd();
 

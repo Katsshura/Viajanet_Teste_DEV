@@ -6,6 +6,7 @@ using RabbitMQ.Robot.Domain;
 using RabbitMQ.Robot.Infrastructure.Connections;
 using RabbitMQ.Robot.Infrastructure.DataContent;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace RabbitMQ.Robot.Infrastructure
@@ -87,12 +88,14 @@ namespace RabbitMQ.Robot.Infrastructure
         {
             string message = DecodeEventArgBody(eventArgs.Body);
             Purchase purchaseObj = Purchase.FromJson(message);
-            string key = GenerateRandomGuidString();
+            Guid key = Guid.NewGuid();
+
+            purchaseObj.Id = key;
 
             AddObjectIntoSqlDatabase(purchaseObj);
 
             //Add Purchase into Couchbase bucket
-            _bucket.Upsert(key, new
+            _bucket.Upsert(key.ToString(), new
             {
                 ProductId = purchaseObj.ProductId,
                 UserId = purchaseObj.UserId,
@@ -108,7 +111,6 @@ namespace RabbitMQ.Robot.Infrastructure
             if (!userObj.Id.HasValue) { userObj.Id = Guid.NewGuid(); }
 
             AddObjectIntoSqlDatabase(userObj);
-
             //Add User into Couchbase bucket
             _bucket.Upsert(userObj.Id.ToString(), new
             {
@@ -186,6 +188,7 @@ namespace RabbitMQ.Robot.Infrastructure
                 Type = three.GetType().Name
             });
 
+            db.SaveChanges();
             Console.WriteLine("Products were populated into databases");
         }
     }

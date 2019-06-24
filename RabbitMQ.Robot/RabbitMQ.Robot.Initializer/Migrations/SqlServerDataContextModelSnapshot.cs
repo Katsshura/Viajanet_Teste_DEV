@@ -63,7 +63,7 @@ namespace RabbitMQ.Robot.Initializer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Purhcase");
+                    b.ToTable("Purchase");
                 });
 
             modelBuilder.Entity("RabbitMQ.Robot.Domain.User", b =>
@@ -82,6 +82,10 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                     b.Property<long>("PhoneNumber");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("User");
                 });

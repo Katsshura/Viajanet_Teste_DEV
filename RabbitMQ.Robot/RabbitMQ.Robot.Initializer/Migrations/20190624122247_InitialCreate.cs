@@ -51,7 +51,7 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Purhcase",
+                name: "Purchase",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -60,15 +60,15 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Purhcase", x => x.Id);
+                    table.PrimaryKey("PK_Purchase", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Purhcase_Product_ProductId",
+                        name: "FK_Purchase_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Purhcase_User_UserId",
+                        name: "FK_Purchase_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -76,14 +76,21 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purhcase_ProductId",
-                table: "Purhcase",
+                name: "IX_Purchase_ProductId",
+                table: "Purchase",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purhcase_UserId",
-                table: "Purhcase",
+                name: "IX_Purchase_UserId",
+                table: "Purchase",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_Email",
+                table: "User",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -92,7 +99,7 @@ namespace RabbitMQ.Robot.Initializer.Migrations
                 name: "BrowserInformation");
 
             migrationBuilder.DropTable(
-                name: "Purhcase");
+                name: "Purchase");
 
             migrationBuilder.DropTable(
                 name: "Product");
