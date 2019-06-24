@@ -2,6 +2,14 @@
 
 Evaluation test using C#, ASP.Net, RabbitMq, Angular, Sql Server and Couchbase.
 
+## Screenshots
+
+![Sign In Page](https://github.com/Katsshura/Viajanet_Teste_DEV/blob/master/Screenshots/signin.png)
+![Sign In Page](https://github.com/Katsshura/Viajanet_Teste_DEV/blob/master/Screenshots/signup.png)
+![Sign In Page](https://github.com/Katsshura/Viajanet_Teste_DEV/blob/master/Screenshots/leading.PNG)
+![Sign In Page](https://github.com/Katsshura/Viajanet_Teste_DEV/blob/master/Screenshots/payment.PNG)
+![Sign In Page](https://github.com/Katsshura/Viajanet_Teste_DEV/blob/master/Screenshots/checkout.PNG)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
