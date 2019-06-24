@@ -4,12 +4,22 @@
   <div class="form">
     <div class="wrapper">
       <div class="row">
-        <app-card-form title="VAI TOMAR NO CU" productId="2345"></app-card-form>
-        <app-card-form title="Hello MotherFucker" productId=12345>
+        <app-card-form title="Basic Package" productId="{{products[0].id}}"
+          subtitle="This Basic Package comes with the following items:" productPrice={{products[0].price}}>
         </app-card-form>
-        <app-card-form title="AAAAAAAAAAAAAA" productId=4567>
+        <app-card-form title="Deluxe Package" productId={{products[1].id}}
+          subtitle="This Deluxe Package comes with the following items:" productPrice={{products[1].price}}>
+        </app-card-form>
+        <app-card-form title="Premium Package" productId={{products[2].id}}
+          subtitle="This Premium Package comes with the following items:" productPrice={{products[2].price}} onSubmit="loadAnotherPage">
         </app-card-form>
       </div>
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+          <p class="mb-1">&copy; 2019 Viajanet Evaluation</p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">References</a></li>
+          </ul>
+        </footer>
     </div>
   </div>
 </div>
