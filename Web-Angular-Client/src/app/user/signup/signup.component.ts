@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, NgForm, Form } from '@angular/forms';
 import { SignupService } from 'src/app/services/signup.service';
+import { BrowserService } from 'src/app/services/browser.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { SignupService } from 'src/app/services/signup.service';
 
 export class SignupComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private service: SignupService) { }
+  constructor(private fb: FormBuilder, private service: SignupService, private browser_service: BrowserService) { }
 
   formModel = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -35,7 +36,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.browser_service.sendBrowserInformationToApi();
   }
 
   async onSubmit(fb: NgForm){
