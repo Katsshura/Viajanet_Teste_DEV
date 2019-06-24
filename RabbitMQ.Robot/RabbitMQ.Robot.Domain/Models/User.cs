@@ -38,5 +38,22 @@ namespace RabbitMQ.Robot.Domain
             string temp = Name + " " + LastName;
             return temp;
         }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as User;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            return this.Email.Equals(item.Email);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Email.GetHashCode();
+        }
     }
 }

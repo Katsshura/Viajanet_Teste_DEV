@@ -10,7 +10,7 @@ using RabbitMQ.Robot.Initializer.DataContexts;
 namespace RabbitMQ.Robot.Initializer.Migrations
 {
     [DbContext(typeof(SqlServerDataContext))]
-    [Migration("20190622064542_InitialCreate")]
+    [Migration("20190624081429_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,13 +52,18 @@ namespace RabbitMQ.Robot.Initializer.Migrations
 
             modelBuilder.Entity("RabbitMQ.Robot.Domain.Purchase", b =>
                 {
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("ProductId");
 
-                    b.HasKey("UserId", "ProductId");
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Purhcase");
                 });

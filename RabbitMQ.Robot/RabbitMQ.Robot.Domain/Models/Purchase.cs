@@ -7,6 +7,9 @@ namespace RabbitMQ.Robot.Domain
 {
     public class Purchase
     {
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
+
         [JsonProperty("userId")]
         public Guid UserId { get; set; }
 
@@ -24,6 +27,23 @@ namespace RabbitMQ.Robot.Domain
         public static string ToJson(Purchase self)
         {
             return JsonConvert.SerializeObject(self, JsonConverter.Settings);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as Purchase;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            return this.Id.Equals(item.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
         }
 
     }

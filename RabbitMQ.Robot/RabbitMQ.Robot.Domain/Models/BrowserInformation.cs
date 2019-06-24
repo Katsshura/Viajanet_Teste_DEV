@@ -28,5 +28,22 @@ namespace RabbitMQ.Robot.Domain
             string temp = Ip + " On Page: " + PageName;
             return temp;
         }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as BrowserInformation;
+
+            if(item == null)
+            {
+                return false;
+            }
+
+            return this.Ip.Equals(item.Ip) && this.PageName.Equals(item.PageName);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Ip.GetHashCode() + this.PageName.GetHashCode();
+        }
     }
 }

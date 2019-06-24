@@ -6,16 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190621214641_FormatedMigration.cs" />
-    <Compile Remove="Migrations\20190621214742_FormatedMigration.cs" />
-    <Compile Remove="Migrations\20190621215823_FormatedMigration.cs" />
-    <Compile Remove="Migrations\20190621215856_FormatedMigration.cs" />
-    <Compile Remove="Migrations\20190621220050_FormatedMigration.cs" />
-    <Compile Remove="Migrations\20190622000407_NewDB.cs" />
-    <Compile Remove="Migrations\20190622050448_REFACTOR_PURCHASE.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CouchbaseNetClient" Version="2.7.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
