@@ -12,53 +12,49 @@ declare const postResponse: any;
 })
 export class SignupService {
 
+  form:NgForm;
+
   constructor(private router: Router, private toastr: ToastrService) { }
 
 
-  async onSignUp(fb: NgForm){
-
-    let data = {"name":"Emerson","lastName":"Alves","email":"xr.emerson@gmail.com","password":"123456","phoneNumber":82999480679};
-      postResponse("user", data, (res, status) => this.handleResponseFromServer(res, status));
-
-    // let email = fb.value['email'];;
-    // if(await this.isEmailAlreadyRegistred(email) === false){
-    //   //Using lambda function to not lose ref for this class
-    //   let data = this.generateJsonFromNgForm(fb);
-    //   postResponse("user", data, (res, status) => this.handleResponseFromServer(res, status));
-    // }else{
-    //   this.toastr.error('Email already in use!', 'Sign Up Failed!');
-    // }
+  public onSignUp(fb: NgForm) {
+    this.form = fb;
+    let email = fb.value['email'];;
+    this.getResponseFromServer({email: email}, (res) => this.verifyAlreadyRegistredEmail(res));
   }
 
-  async isEmailAlreadyRegistred(email: string){
-    if(email === null){return;}
-    //Using lambda function to not lose ref for this class
-    let res = await getResponse("user/getemail", {email: email});
-    console.log(res);
-    if(res === undefined || res === null){
-      return false;
-    }else{
-      return true;
+  private getResponseFromServer(data, callback){
+    getResponse("user/getemail", data, callback);
+  }
+
+  private verifyAlreadyRegistredEmail(res: any) {
+    //if null or undefined, means that there isn`t any email registred on the server
+    //proceed sign up
+    if(res === null || res === undefined){
+      let data = this.generateJsonFromNgForm(this.form);
+      this.makePostRequest(data);
+    }else {
+      this.toastr.error('Email already in use!', 'Sign Up Failed!');
     }
   }
 
-  handleResponseFromServer(res, status){
-    console.log(res);
-    if(status === 'success'){
-      this.router.navigateByUrl('/landing');
-      this.toastr.success('Successfully logged in!', 'Enjoy!');
-    }else{
-      this.toastr.error('Internal problems, try again later!', 'Internal Error!');
-    }
+  private makePostRequest(data){
+    postResponse("user", data, (res) => this.onServerResponse(res));
   }
 
-  generateJsonFromNgForm(fb: NgForm){
+  private onServerResponse(res) {
+    console.log(res);
+    this.router.navigateByUrl('/home/signin');
+    this.toastr.success('Successfully registered, proceed to login!', 'User Registred!');
+  }
+
+  private generateJsonFromNgForm(fb: NgForm) {
     let json = {
-      "name":fb.value['name'],
-      "lastName":fb.value['lastName'],
-      "email":fb.value['email'],
-      "password":fb.value['password'],
-      "phoneNumber":fb.value['phoneNumber']
+      "name": fb.value['name'],
+      "lastName": fb.value['lastName'],
+      "email": fb.value['email'],
+      "password": fb.value['password'],
+      "phoneNumber": fb.value['phoneNumber']
     }
 
     return json;
