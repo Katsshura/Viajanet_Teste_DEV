@@ -5,18 +5,17 @@
       <hr>
     </mat-card-header>
     <mat-card-content>
+      <img src="{{imgsrc}}" alt="{{alt}}" height="110px" class="mx-auto d-block">
       <br>
       <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
-      <!-- Using Ng-Template to show the description for each element-->
- 
       <ng-template [ngIf]="productId == products[0].id">
         <div>
           <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Item 5</li>
+            <li>x1 House Decoration</li>
+            <li>x1 Mansion Decoration</li>
+            <li>x1 Estate Decoration</li>
+            <li>x1 Mount Razor (15 days)</li>
+            <li>x1000 Platinum Coins</li>
           </ul>
         </div>
         <h6 class="card-price text-center">${{productPrice}}</h6>
@@ -24,14 +23,14 @@
       <ng-template [ngIf]="productId == products[1].id">
         <div>
           <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Item 5</li>
-            <li>Item 6</li>
-            <li>Item 7</li>
-            <li>Item 8</li>
+            <li>x2 House Decoration</li>
+            <li>x2 Mansion Decoration</li>
+            <li>x2 Estate Decoration</li>
+            <li>x1 Mount Razor (15 days)</li>
+            <li>x3000 Platinum Coins</li>
+            <li>x1 School Costume Crate</li>
+            <li>x2 School Accessory Costume Crate</li>
+            <li>x1 Dragon Armor Skin Crate</li>
           </ul>
         </div>
         <h6 class="card-price text-center">${{productPrice}}</h6>
@@ -39,23 +38,23 @@
       <ng-template [ngIf]="productId == products[2].id">
         <div>
           <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Item 5</li>
-            <li>Item 6</li>
-            <li>Item 7</li>
-            <li>Item 8</li>
-            <li>Item 9</li>
-            <li>Item 10</li>
+            <li>x3 House Decoration</li>
+            <li>x3 Mansion Decoration</li>
+            <li>x3 Estate Decoration</li>
+            <li>x1 Mount Razor (30 days)</li>
+            <li>x5000 Platinum Coins</li>
+            <li>x2 School Costume Crate</li>
+            <li>x4 School Accessory Costume Crate</li>
+            <li>x2 Dragon Armor Skin Crate</li>
+            <li>x1 Dragon Weapon Skin Crate</li>
+            <li>x1 Premium Random Costume</li>
           </ul>
         </div>
         <h6 class="card-price text-center">${{productPrice}}</h6>
       </ng-template>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button type="button" class="btn btn-secondary" (click)="onClick(productId)">Comprar</button>
+      <button type="button" class="btn btn-secondary" (click)="onClick(productId)">Buy</button>
     </mat-card-actions>
   </mat-card>
 </div>
